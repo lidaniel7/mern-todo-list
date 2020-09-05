@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class CreateTodo extends Component {
     constructor(props) {
         super(props);
 
         this.onChangeTodoDescription = this.onChangeTodoDescription.bind(this);
-        this.onChangeTodoResponsible = this.onChangeTodoResponsible.bind(this);
+        this.onChangeTodoUser = this.onChangeTodoUser.bind(this);
         this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
 
         this.state = {
             todo_description: '',
-            todo_responsible: '',
+            todo_user: '',
             todo_priority: '',
             todo_completed: false
         }
@@ -26,9 +27,9 @@ class CreateTodo extends Component {
         });
     }
 
-    onChangeTodoResponsible(e) {
+    onChangeTodoUser(e) {
         this.setState({
-            todo_responsible: e.target.value
+            todo_user: e.target.value
         });
     }
 
@@ -43,12 +44,24 @@ class CreateTodo extends Component {
         
         console.log(`Form submitted:`);
         console.log(`Todo Description: ${this.state.todo_description}`);
-        console.log(`Todo Responsible: ${this.state.todo_responsible}`);
+        console.log(`Todo User: ${this.state.todo_user}`);
         console.log(`Todo Priority: ${this.state.todo_priority}`);
         
+        //create todo object to pass to backend
+        const newTodo = {
+            todo_description: this.state.todo_description,
+            todo_user: this.state.todo_user,
+            todo_priority: this.state.todo_priority,
+            todo_completed: this.state.todo_completed
+        }
+
+        //axios.post returns a promise so we can add a chain of 'then()'
+        axios.post('http://localhost:4000/todos/add', newTodo)
+            .then(res => console.log(res.data));
+
         this.setState({
             todo_description: '',
-            todo_responsible: '',
+            todo_user: '',
             todo_priority: '',
             todo_completed: false
         })
@@ -68,12 +81,12 @@ class CreateTodo extends Component {
                                 />
                     </div>
                     <div className="form-group">
-                        <label>Responsible: </label>
+                        <label>User: </label>
                         <input 
                                 type="text" 
                                 className="form-control"
-                                value={this.state.todo_responsible}
-                                onChange={this.onChangeTodoResponsible}
+                                value={this.state.todo_user}
+                                onChange={this.onChangeTodoUser}
                                 />
                     </div>
                     <div className="form-group">
