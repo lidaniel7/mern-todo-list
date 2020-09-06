@@ -69,8 +69,8 @@ class CreateTodo extends Component {
 
     render() {
         return (
-            <div style={{marginTop: 10}}>
-                <h3>Create New Todo</h3>
+            <div>
+                <h3>Create New Task</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group"> 
                         <label>Description: </label>
@@ -90,6 +90,7 @@ class CreateTodo extends Component {
                                 />
                     </div>
                     <div className="form-group">
+                        <label style={{paddingRight: 15}}>Priority: </label>
                         <div className="form-check form-check-inline">
                             <input  className="form-check-input" 
                                     type="radio" 

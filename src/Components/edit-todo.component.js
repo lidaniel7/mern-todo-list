@@ -11,6 +11,7 @@ class EditTodo extends Component {
         this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
         this.onChangeTodoCompleted = this.onChangeTodoCompleted.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onDelete = this.onDelete.bind(this);
 
         this.state = {
             todo_description: '',
@@ -63,7 +64,7 @@ class EditTodo extends Component {
         e.preventDefault();
         const obj = {
             todo_description: this.state.todo_description,
-            todo_responsible: this.state.todo_responsible,
+            todo_user: this.state.todo_user,
             todo_priority: this.state.todo_priority,
             todo_completed: this.state.todo_completed
         };
@@ -73,6 +74,20 @@ class EditTodo extends Component {
         
         this.props.history.push('/');
     }
+
+    onDelete(e) {
+        e.preventDefault();
+        const obj = {
+            todo_description: '',
+            todo_user: '',
+            todo_priority: '',
+            todo_completed: false
+        }
+        axios.post('http://localhost:4000/todos/delete/'+this.props.match.params.id, obj)
+            .then(res => console.log(res.data));
+        this.props.history.push('/');
+    }
+
 
     render() {
         return (
@@ -146,7 +161,8 @@ class EditTodo extends Component {
                     </div>
 
                     <br />
-
+                    
+                    <button onClick={this.onDelete}>Delete</button>
                     <div className="form-group">
                         <input type="submit" value="Update Todo" className="btn btn-primary" />
                     </div>

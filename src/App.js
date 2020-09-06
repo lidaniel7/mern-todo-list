@@ -14,14 +14,14 @@ function App() {
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <img src={logo} alt="" width="30" height="30"/>
-            <Link to="/" className="navbar-brand">MERN-Stack Todo App</Link>
+            <Link to="/" className="navbar-brand">MERN Stack Todo App</Link>
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
-                  <Link to="/" className="nav-link">Todos</Link>
+                  <Link to="/" className="nav-link">Tasks</Link>
                 </li>
                 <li className="navbar-item">
-                  <Link to="/create" className="nav-link">Create Todo</Link>
+                  <Link to="/create" className="nav-link">Create Tasks</Link>
                 </li>
               </ul>
             </div>

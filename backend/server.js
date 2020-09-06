@@ -7,6 +7,7 @@ const todoRoutes = express.Router();
 const PORT = 4000;
 
 let Todo = require('./todo.model');
+const { db } = require('./todo.model');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -18,7 +19,7 @@ connection.once('open', function() {
     console.log('MongoDB database connection established successfully');
 })
 
-//First of all we need to add an endpoint which is delivering all available todos items
+//First we need to add an endpoint which is delivering all available todos items
 todoRoutes.route('/').get(function(req, res) {
     Todo.find(function(err, todos) {
         if (err) {
@@ -65,6 +66,16 @@ todoRoutes.route('/update/:id').post(function(req, res) {
             .catch(err => {
                 res.status(400).send("Todo cannot be updated");
             });
+        };
+    });
+});
+
+todoRoutes.route('/delete/:id').post(function(req, res) {
+    Todo.findById(req.params.id, function(err, todo) {
+        if (!todo) {
+            res.status(404).send('data is not found');
+        } else {
+            todo.remove()
         };
     });
 });
