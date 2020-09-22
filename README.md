@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+Todo list built with the MERN stack (MongoDB, Express, React, Node)
+
 # todo-list
 =======
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
